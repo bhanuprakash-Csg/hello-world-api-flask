@@ -1,27 +1,22 @@
 version: 2.1
+
 jobs:
   build:
     docker:
-      - image: circleci/python:3.8  # You can specify your desired Python version here
-
+      - image: circleci/python:3.8  # You can use any base image for this job
     steps:
       - checkout  # Checkout your code from the repository
-
+      - setup_remote_docker:  # Enable Docker support in the job
+          version: 20.10.7  # Specify the Docker version you want to use
       - run:
-          name: Set up Python environment
+          name: Build Docker image
           command: |
-            python -m venv venv
-            source venv/bin/activate
-            pip install -r flask==1.1.2
-
-      - run:
-          name: Run Tests
-          command: |
-            # Run your Python tests here
-            python -m unittest discover -s tests
+            docker build -t my-python-app:latest .
+            docker images  # Optional: Display the list of images for verification
 
 workflows:
   version: 2
-  build-and-test:
+  build-docker-image:
     jobs:
       - build
+
