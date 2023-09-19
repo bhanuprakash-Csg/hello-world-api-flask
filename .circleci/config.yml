@@ -13,6 +13,15 @@ jobs:
           command: |
             docker build -t my-python-app:latest .
             docker images  # Optional: Display the list of images for verification
+      - run:
+          name: Login to Docker Hub
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - run:
+          name: Push Docker image to Docker Hub
+          command: |
+            docker tag my-python-app:latest "$DOCKER_USERNAME/my-python-app:latest"
+            docker push "$DOCKER_USERNAME/my-python-app:latest"      
 
 workflows:
   version: 2
