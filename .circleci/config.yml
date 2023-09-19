@@ -1,0 +1,27 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.8  # You can specify your desired Python version here
+
+    steps:
+      - checkout  # Checkout your code from the repository
+
+      - run:
+          name: Set up Python environment
+          command: |
+            python -m venv venv
+            source venv/bin/activate
+            pip install -r flask 
+
+      - run:
+          name: Run Tests
+          command: |
+            # Run your Python tests here
+            python -m unittest discover -s tests
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
