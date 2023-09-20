@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: my-app-container
-          image: bhanuprakashnrb/my-python-app:latest
-          imagePullPolicy: Always
+          image: bhanuprakashnrb/my-python-app:lates
           ports:
             - containerPort: 80
+          imagePullPolicy: Always  
