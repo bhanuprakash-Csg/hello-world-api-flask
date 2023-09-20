@@ -23,34 +23,13 @@ jobs:
             docker tag my-python-app:latest "$DOCKER_USERNAME/my-python-app:latest"
             docker push "$DOCKER_USERNAME/my-python-app:latest"
 
-  deploy-argocd:
-    docker:
-      - image: circleci/python:3.8
-    steps:
-      - checkout
-      - run:
-          name: Install ArgoCD CLI
-          command: |
-            sudo wget https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -O /usr/local/bin/argocd
-            sudo chmod +x /usr/local/bin/argocd
-            argocd version
-      - run:
-          name: Login to ArgoCD
-          command: |
-            argocd login --username "$ARGOCD_USERNAME" --password "$ARGOCD_PASSWORD" --server "$ARGOCD_SERVER"
-      - run:
-          name: Deploy ArgoCD Application
-          command: |
-            argocd app create my-app --repo https://github.com/your-repo.git --path ./argocd-app --dest-server https://kubernetes.default.svc --dest-namespace default
-            argocd app sync my-app
+  
 
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build
-      - deploy-argocd:
-          requires:
-            - build
+     
 
 
