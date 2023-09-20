@@ -1,9 +1,11 @@
-apiVersion: apps/v1
+ apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-deployment
+  name: python-app
+  labels:
+    app: my-app
 spec:
-  replicas: 3
+  replicas: 3  # Number of desired replicas
   selector:
     matchLabels:
       app: my-app
@@ -13,8 +15,28 @@ spec:
         app: my-app
     spec:
       containers:
-        - name: my-app-container
-          image: bhanuprakashnrb/my-python-app:lates
-          ports:
-            - containerPort: 80
-          imagePullPolicy: Always  
+      - name: hose-renting-container
+        image: bhanuprakashnrb/my-python-app:latest  # Replace with your Docker Hub image path
+        imagePullPolicy: Always  # Always attempt to pull the image
+        ports:
+        - containerPort: 80  # Replace with the port your application listens on
+        readinessProbe:
+          httpGet:
+            path: /get_data  # Replace with your application's readiness endpoint
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path:  /get_data # Replace with your application's liveness endpoint
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /get_data   # Replace with your application's startup endpoint
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 5
+      imagePullSecrets:
+      - name: regcred # Replace with the name of your Docker Hub secret
