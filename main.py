@@ -3,7 +3,7 @@ import json
 app = Flask(__name__)
 @app.route("/")
 def helloworld():
-    return "Hello World! its python new api "
+    return "Hello World! its python new api  this is working fine now "
 
 @app.route("/get_data")
 def getdata():
