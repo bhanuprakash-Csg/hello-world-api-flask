@@ -9,4 +9,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-  type: LoadBalancer
+      nodePort: 30000 # You can specify the NodePort number here (in this example, 30000)
+  type: NodePort # Change the service type to NodePort
