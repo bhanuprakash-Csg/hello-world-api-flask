@@ -8,8 +8,8 @@ def helloworld():
 @app.route("/get_data")
 def getdata():
     data = {
-        'Name' : 'Bhanuprakash N R',
-        'Employee No' : '12310'
+        'Name' : 'Bharath Y',
+        'Employee No' : '12330'
     }
     return json.dumps(data)
 
