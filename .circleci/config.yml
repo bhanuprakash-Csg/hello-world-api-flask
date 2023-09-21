@@ -18,7 +18,7 @@ jobs:
             docker build -t bhanuprakshnrb/circle-ci-app:$version .
             docker images
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME"  --password-stdin
-            docker push "bhanuprakshnrb/circle-ci-app:$version"
+            docker push bhanuprakshnrb/circle-ci-app:$version
 workflows:
   version: 2
   build-deploy:
