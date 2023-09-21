@@ -13,7 +13,6 @@ jobs:
           command: |
             version="$CIRCLE_SHA1"
             # Remove any characters that are invalid in Docker image tags
-            version=$(echo "$version" | tr -cd '[:lower:][:digit:]-')
             echo $version
             docker build -t circle-ci-app:$version .
             docker images
