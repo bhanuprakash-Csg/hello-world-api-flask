@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            version="build-$CIRCLE_BUILD_NUM"
+            version="$CIRCLE_SHA1"
             # Remove any characters that are invalid in Docker image tags
             version=$(echo "$version" | tr -cd '[:lower:][:digit:]-')
             echo $version
