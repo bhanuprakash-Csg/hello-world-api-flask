@@ -13,7 +13,7 @@ jobs:
           command: |
             version="build-$CIRCLE_BUILD_NUM"
             echo $version
-            docker build -t my-python-app:$version .
+            docker build -t new-python-app:$version .
             docker images
       - run:
           name: Login to Docker Hub
@@ -22,8 +22,8 @@ jobs:
       - run:
           name: Push Docker image to Docker Hub
           command: |
-            docker tag my-python-app:$version "$DOCKER_USERNAME/my-python-app:$version"
-            docker push "$DOCKER_USERNAME/my-python-app:$version"
+            docker tag new-python-app:$version "$DOCKER_USERNAME/new-python-app:$version"
+            docker push "$DOCKER_USERNAME/new-python-app:$version"
 
 workflows:
   version: 2
