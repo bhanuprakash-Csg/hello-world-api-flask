@@ -15,18 +15,10 @@ jobs:
             # Remove any characters that are invalid in Docker image tags
             version=$(echo "$version" | tr -cd '[:lower:][:digit:]-')
             echo $version
-            docker build -t my-python-app:$version .
+            docker build -t bhanuprakshnrb/my-python-app:$version .
             docker images
-      - run:
-          name: Login to Docker Hub
-          command: |
-            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - run:
-          name: Push Docker image to Docker Hub
-          command: |
-            docker tag my-python-app:$version "$DOCKER_USERNAME/my-python-app:$version"
-            docker push "$DOCKER_USERNAME/my-python-app:$version"
-
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME"  --password-stdin
+            docker push "bhanuprakshnrb/my-python-app:$version"
 workflows:
   version: 2
   build-deploy:
