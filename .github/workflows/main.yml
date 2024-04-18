@@ -61,6 +61,13 @@ jobs:
           docker tag git-ci-app:"$version" bhanunr/santhosha12:"$version"
           docker push bhanunr/santhosha12:"$version"
           
+      - name: Wait for Minikube to be ready
+        run: |
+          minikube status
+          minikube kubectl -- get pods --all-namespaces
+          timeout-minutes: 5
+    
+          
       - name: Configure kubectl
         run: |
          kubectl config use-context minikube     
