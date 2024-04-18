@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hose-renting-container
-        image: bhanuprakashnrb/my-python-app:latest  # Replace with your Docker Hub image path
+        image: bhanunr/santhosha12:latest  # Replace with your Docker Hub image path
         imagePullPolicy: Always  # Always attempt to pull the image
         ports:
         - containerPort: 80  # Replace with the port your application listens on
