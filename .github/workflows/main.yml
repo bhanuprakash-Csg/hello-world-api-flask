@@ -1,0 +1,27 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker image
+        run: |
+          version="${GITHUB_SHA::8}"
+          echo "$version"
+          docker build -t circle-ci-app:"$version" .
+          docker images
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u bhanuprakashnrb --password-stdin docker.io
+          docker tag circle-ci-app:"$version" bhanuprakshnrb/circle-ci-app:"$version"
+          docker push bhanuprakshnrb/circle-ci-app:"$version"
