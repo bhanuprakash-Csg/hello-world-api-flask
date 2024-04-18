@@ -60,5 +60,5 @@ jobs:
 
       - name: Deploy application to Minikube
         run: |
-          kubectl apply -f /yaml/python-app-deploy.yaml
+          kubectl apply -f yaml/python-app-deploy.yaml
           kubectl apply -f yaml/python-app-svc.yaml        
