@@ -67,7 +67,7 @@ jobs:
         run: |
           minikube status
           minikube kubectl -- get pods --all-namespaces
-          timeout-minutes: 5
+          #timeout-minutes: 5
     
           
       - name: Configure kubectl
